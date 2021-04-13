@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form | Arsl</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+
+<body class="bg-secondary">
+    <div id="main " class="container">
+        <div id="wrapper">
+            <div id="input" class="col-md-4 float-left mt-5">
+                <div id="imgsss"></div>
+                <form">
+                    <div class="input-row">
+                        <div class="left">
+                            <label for="fname">Type Your First Name: </label>
+                        </div>
+                        <div class="right">
+                            <input type="text" name="fname" id="fname" class="form-control"
+                                placeholder="Type Your First Name">
+                            <small style="color: red; background-color: white;"></small>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="left">
+                            <label for="lname">Type Your Last Name: </label>
+                        </div>
+                        <div class="right">
+                            <input type="text" name="lname" id="lname" class="form-control"
+                                placeholder="Type Your Last Name">
+                            <small style="color: red; background-color: white;"></small>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="left">
+                            <label for="fathername">Type Your Father Name: </label>
+                        </div>
+                        <div class="right">
+                            <input type="text" name="fathername" id="fathername" class="form-control"
+                                placeholder="Type Your Father Name">
+                            <small style="color: red; background-color: white;"></small>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="left">
+                            <label for="age">Type Your Age: </label>
+                        </div>
+                        <div class="right">
+                            <input type="number" name="age" id="age" class="form-control" placeholder="Type Your Age">
+                            <small style="color: red; background-color: white;"></small>
+                            <!-- <output name="ageo" class="align-top font-weight-bolder">(Age)</output>
+                            <span class="year align-top font-weight-bolder">Year</span> -->
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="left">
+                            <label for="phone">Type Your Phone Number: </label>
+                        </div>
+                        <div class="right">
+                            <input type="text" name="phone" id="phone" class="form-control"
+                                placeholder="Type Your Phone Number" maxlength="11">
+                            <small style="color: red; background-color: white;"></small>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="left">
+                            <label for="email">Type Your Email Address: </label>
+                        </div>
+                        <div class="right">
+                            <input type="email" name="email" id="email" class="form-control"
+                                placeholder="Type Your Email">
+                            <small style="color: red; background-color: white;"></small>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="left">
+                            <label for="image">Upload Your Picture: </label>
+                        </div>
+                        <div class="right">
+                            <input type="file" class="form-control-file" name="image" id="image" accept="image/*">
+                            <small id="sm-file" style="color: red; background-color: white;"></small>
+                        </div>
+                    </div>
+                    <input type="button" value="Submit Form" class="btn btn-success my-3" id="formd"
+                        onclick="return mydata()">
+
+                </form>
+            </div>
+
+
+
+            <div id="output" class="col-md-8 d-inline-block">
+                <div id="oBody">
+                    <h2 id="tableh1" class="my-3">Please Fill Form!</h2>
+                    <table class="table table-hover table-striped table-dark table-bordered">
+                        <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Father Name</th>
+                                <th>Age</th>
+                                <th>Phone Number</th>
+                                <th>Email Address</th>
+                                <th>Image</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody"></tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var fname = document.getElementById('fname');
+        var lname = document.getElementById('lname');
+        var fathername = document.getElementById('fathername');
+        var age = document.getElementById('age');
+        var phone = document.getElementById('phone');
+        var email = document.getElementById('email');
+        var h1 = document.getElementById('tableh1');
+        var obody = document.getElementById('oBody');
+        const image = document.getElementById('image').value;
+        var myimg = '';
+        const table = document.getElementById('tbody');
+
+        $('input[type=file]').change(function () {
+            console.log(this.files[0].name);
+            myimg = this.files[0].name;
+        });
+
+        function mydata(event) {
+
+            obody.style.display = 'block';
+
+
+
+            table.innerHTML = table.innerHTML + '<tr>' +
+                '<td>' + fname.value + '</td>' +
+                '<td>' + lname.value + '</td>' +
+                '<td>' + fathername.value + '</td>' +
+                '<td>' + age.value + '</td>' +
+                '<td>' + phone.value + '</td>' +
+                '<td>' + email.value + '</td>' +
+                `<td><img src=${myimg} alt="img" width="60" height="60" id="imgsss" ></td> ` +
+                '</tr>';
+            tableh1.innerHTML = 'Hello ' + fname.value + ' ' + lname.value + ' s/o ' + fathername.value;
+
+            if (fname.value == "" || !isNaN(fname.value)) {
+                fname.parentElement.children[1].innerHTML = "** Please Type Your First Name"
+                fname.style.border = "2px solid red"
+                return false;
+            } else fname.parentElement.children[1].innerHTML = ""
+            fname.style.border = "2px solid green"
+
+            if (lname.value == "") {
+                lname.parentElement.children[1].innerHTML = "** Please Type Your Last Name"
+                lname.style.border = "2px solid red"
+                return false;
+            } else lname.parentElement.children[1].innerHTML = ""
+            lname.style.border = "2px solid green"
+
+            if (fathername.value == "") {
+                fathername.parentElement.children[1].innerHTML = "** Please Type Father Name"
+                fathername.style.border = "2px solid red"
+                return false;
+            } else fathername.parentElement.children[1].innerHTML = ""
+            fathername.style.border = "2px solid green"
+
+            if (age.value == "") {
+                age.parentElement.children[1].innerHTML = "** Please Type Age"
+                age.style.border = "2px solid red"
+                return false;
+            } else age.parentElement.children[1].innerHTML = ""
+            age.style.border = "2px solid green"
+
+            if (phone.value == "") {
+                phone.parentElement.children[1].innerHTML = "** Please Type Phone Number"
+                phone.style.border = "2px solid red"
+                return false;
+            } else phone.parentElement.children[1].innerHTML = ""
+            phone.style.border = "2px solid green"
+
+            if (email.value == "") {
+                email.parentElement.children[1].innerHTML = "** Please Type Email Address"
+                email.style.border = "2px solid red"
+                return false;
+            } else email.parentElement.children[1].innerHTML = ""
+            email.style.border = "2px solid green"
+
+            if (document.getElementById('image').value == "") {
+                document.getElementById('sm-file').innerHTML = "** Please Select a File"
+                document.getElementById('image').style.border = "2px solid red"
+                return false;
+            } else document.getElementById('sm-file').innerHTML = ""
+            document.getElementById('image').style.border = "2px solid green"
+
+
+            // Clear Form
+
+            if (fname.value = "") { }
+            if (lname.value = "") { }
+            if (fathername.value = "") { }
+            if (age.value = "") { }
+            if (phone.value = "") { }
+            if (email.value = "") { }
+            document.getElementById('image').value = '';
+
+
+
+
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
