@@ -94,7 +94,7 @@
 
 
 
-            <div id="output" class="col-md-8 d-inline-block">
+            <div id="output" class="col-md-8 d-inline-block" style="overflow: auto;">
                 <div id="oBody">
                     <h2 id="tableh1" class="my-3">Please Fill Form!</h2>
                     <table class="table table-hover table-striped table-dark table-bordered">
@@ -142,23 +142,24 @@
             obody.style.display = 'block';
 
 
-
-            if (fname.value == "" || !isNaN(fname.value)) {
-                fname.parentElement.children[1].innerHTML = "** Please Type Your First Name"
+            var letters = /^[A-Z a-z]+$/;
+            var numbers = /^[0-9]+$/;
+            if (fname.value == "" || !fname.value.match(letters)) {
+                fname.parentElement.children[1].innerHTML = "** Please Type Your First Name <br> Only Alphabets"
                 fname.style.border = "2px solid red"
                 return false;
             } else fname.parentElement.children[1].innerHTML = ""
             fname.style.border = "2px solid green"
 
-            if (lname.value == "") {
-                lname.parentElement.children[1].innerHTML = "** Please Type Your Last Name"
+            if (lname.value == "" || !lname.value.match(letters)) {
+                lname.parentElement.children[1].innerHTML = "** Please Type Your Last Name <br> Only Alphabets"
                 lname.style.border = "2px solid red"
                 return false;
             } else lname.parentElement.children[1].innerHTML = ""
             lname.style.border = "2px solid green"
 
-            if (fathername.value == "") {
-                fathername.parentElement.children[1].innerHTML = "** Please Type Father Name"
+            if (fathername.value == "" || !fathername.value.match(letters)) {
+                fathername.parentElement.children[1].innerHTML = "** Please Type Father Name <br> Only Alphabets"
                 fathername.style.border = "2px solid red"
                 return false;
             } else fathername.parentElement.children[1].innerHTML = ""
@@ -177,14 +178,42 @@
                 return false;
             } else phone.parentElement.children[1].innerHTML = ""
             phone.style.border = "2px solid green"
-
-            if (email.value == "") {
+            // email vail
+            if ((email.value == "")) {
                 email.parentElement.children[1].innerHTML = "** Please Type Email Address"
                 email.style.border = "2px solid red"
                 return false;
-            } else email.parentElement.children[1].innerHTML = ""
+            }
+
+            var emad = email.value.indexOf("@");
+            if (emad <= 0) {
+                email.parentElement.children[1].innerHTML = "** Please Type Correct Mail (@)"
+                email.style.border = "2px solid red"
+                return false;
+            }
+            var emdot = email.value.lastIndexOf(".");
+            if (emdot == emad + 2) {
+                email.parentElement.children[1].innerHTML = "** Type Some Text After @"
+                email.style.border = "2px solid red"
+                return false;
+            }
+            if (emdot == email.value.length - 1) {
+                email.parentElement.children[1].innerHTML = "** Not Complete "
+                email.style.border = "2px solid red"
+                return false;
+            }
+            if ((email.value.charAt(email.value.length - 3) != ".") && (email.value.charAt(email.value.length - 4) != ".")) {
+                email.parentElement.children[1].innerHTML = "** Please Write Complete Mail Address <br> Example: Abc@Abc.com"
+                email.style.border = "2px solid red"
+                return false;
+            }
+            else email.parentElement.children[1].innerHTML = ""
             email.style.border = "2px solid green"
 
+
+
+
+            // File vail
             if (document.getElementById('image').value == "") {
                 document.getElementById('sm-file').innerHTML = "** Please Select a File"
                 document.getElementById('image').style.border = "2px solid red"
