@@ -11,7 +11,7 @@
 </head>
 
 <body class="bg-secondary">
-    <div id="main " class="container">
+    <div id="main " class="container-fluid ">
         <div id="wrapper">
             <div id="input" class="col-md-4 float-left mt-5">
                 <div id="imgsss"></div>
@@ -62,7 +62,7 @@
                             <label for="phone">Type Your Phone Number: </label>
                         </div>
                         <div class="right">
-                            <input type="text" name="phone" id="phone" class="form-control"
+                            <input type="number" name="phone" id="phone" class="form-control"
                                 placeholder="Type Your Phone Number" maxlength="11">
                             <small style="color: red; background-color: white;"></small>
                         </div>
@@ -89,7 +89,7 @@
                     <input type="button" value="Submit Form" class="btn btn-success my-3" id="formd"
                         onclick="return mydata()">
 
-                </form>
+                    </form>
             </div>
 
 
@@ -143,17 +143,6 @@
 
 
 
-            table.innerHTML = table.innerHTML + '<tr>' +
-                '<td>' + fname.value + '</td>' +
-                '<td>' + lname.value + '</td>' +
-                '<td>' + fathername.value + '</td>' +
-                '<td>' + age.value + '</td>' +
-                '<td>' + phone.value + '</td>' +
-                '<td>' + email.value + '</td>' +
-                `<td><img src=${myimg} alt="img" width="60" height="60" id="imgsss" ></td> ` +
-                '</tr>';
-            tableh1.innerHTML = 'Hello ' + fname.value + ' ' + lname.value + ' s/o ' + fathername.value;
-
             if (fname.value == "" || !isNaN(fname.value)) {
                 fname.parentElement.children[1].innerHTML = "** Please Type Your First Name"
                 fname.style.border = "2px solid red"
@@ -202,6 +191,17 @@
                 return false;
             } else document.getElementById('sm-file').innerHTML = ""
             document.getElementById('image').style.border = "2px solid green"
+
+            table.innerHTML = table.innerHTML + '<tr>' +
+                '<td>' + fname.value + '</td>' +
+                '<td>' + lname.value + '</td>' +
+                '<td>' + fathername.value + '</td>' +
+                '<td>' + age.value + ' Year' + '</td>' +
+                '<td>' + phone.value + '</td>' +
+                '<td>' + email.value + '</td>' +
+                `<td><img src=${myimg} alt="img" width="60" height="60" id="imgsss" ></td> ` +
+                '</tr>';
+            tableh1.innerHTML = 'Hello ' + fname.value + ' ' + lname.value + ' s/o ' + fathername.value;
 
 
             // Clear Form
